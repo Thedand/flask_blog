@@ -15,6 +15,6 @@ def home():
     return render_template('index.html', posts=posts)
 
 
-@main.route('/about')
+@main.route('/contact')
 def about():
-    return render_template('about.html', title='Контакты')
+    return render_template('contact.html', title='Контакты')

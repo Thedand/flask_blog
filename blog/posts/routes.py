@@ -22,13 +22,13 @@ def new_post():
                            form=form, legend='Создать новую статью')
 
 
-@posts.route("/<slug>")
+@posts.route("/post/<slug>")
 def post(slug):
     post = db.session.query(Post).filter(Post.slug == slug).first()
     return render_template('posts/post.html', title=post.title, post=post)
 
 
-@posts.route("/<slug>/edit", methods=['GET', 'POST'])
+@posts.route("/post/<slug>/edit", methods=['GET', 'POST'])
 @login_required
 def edit_post(slug):
     post = db.session.query(Post).filter(Post.slug == slug).first()
@@ -48,7 +48,7 @@ def edit_post(slug):
                            form=form, legend='Редактировать статью')
 
 
-@posts.route("/<slug>/delete", methods=['POST'])
+@posts.route("/post/<slug>/delete", methods=['POST'])
 @login_required
 def delete_post(slug):
     post = db.session.query(Post).filter(Post.slug == slug).first()
