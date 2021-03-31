@@ -1,5 +1,5 @@
-from flask import (render_template, url_for, flash,
-                   redirect, request, abort, Blueprint)
+from flask import (Blueprint, render_template, url_for, flash,
+                   redirect, request, abort)
 from flask_login import current_user, login_required
 from blog import db
 from blog.models import Post

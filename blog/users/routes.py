@@ -1,5 +1,5 @@
-from flask import render_template, url_for, flash, redirect, request, Blueprint
-from flask_login import login_user, logout_user, login_required
+from flask import Blueprint, render_template, url_for, flash, redirect, request
+from flask_login import login_user, logout_user, login_required, current_user
 from blog import db
 from blog.models import User, Post
 from blog.users.forms import RegistrationForm, LoginForm
@@ -48,8 +48,12 @@ def login():
     return render_template('auth/login.html', form=login_form)
 
 
-@users.route('/logout')
+@users.route('/logout', methods=['GET'])
 def logout():
+    user = current_user
+    user.authenticated = False
+    db.session.add(user)
+    db.session.commit()
     logout_user()
     flash("Вы вышли из системы.", "success")
     return redirect(url_for('main.home'))
